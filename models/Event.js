@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   },
   description: String,
   photo: String,
-  admin: String
+  admin: String enlazar
 });
 
 eventSchema.index({ location: "2dsphere" });

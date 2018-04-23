@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const authRoutes = express.Router();
 const User = require("../models/User");
+const uploadCloud = require("../config/cloudinary.js");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -23,10 +24,11 @@ authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-authRoutes.post("/signup", (req, res, next) => {
+authRoutes.post("/signup", uploadCloud.single("photo"),(req, res, next) => {
   const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
-  const rol = req.body.role;
+  const photo = req.file.url;
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -43,8 +45,9 @@ authRoutes.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
+      email,
       password: hashPass,
-      role:"teacher"
+      photo
     });
 
     newUser.save((err) => {

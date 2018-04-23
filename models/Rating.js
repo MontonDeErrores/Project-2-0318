@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const ratingSchema = new Schema({
-  user: String,
-  rating: String,
+  userRated: String, enlazar
+  userRating: String, enlazar
+  rating: String, enum,
   comment: String
 });
 
