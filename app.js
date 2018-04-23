@@ -11,11 +11,12 @@ const path = require('path');
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
+const dbURL = process.env.DBURL;
 
 
 mongoose.Promise = Promise;
 mongoose
-  .connect(`mongodb://localhost/${process.env.DBURL}`, {useMongoClient: true})
+  .connect(`mongodb://localhost/${dbURL}`, {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -60,7 +61,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Fiestit. Planifica un montón de fiestas';
 
 
 // Enable authentication using session + passport
