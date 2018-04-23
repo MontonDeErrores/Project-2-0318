@@ -2,8 +2,11 @@
 	"version": 3,
 	"file": "style.css",
 	"sources": [
-		"style.scss"
+		"style.scss",
+		"_variables.scss",
+		"_header.scss",
+		"_footer.scss"
 	],
 	"names": [],
-	"mappings": "AAAA,AAAA,IAAI,CAAC;EACH,OAAO,EAAE,IAAI;EACb,IAAI,EAAE,kDAAkD,GACzD;;AAED,AAAA,CAAC,CAAC;EACA,KAAK,EAAE,OAAO,GACf"
+	"mappings": "AAAA,AAAA,IAAI,CAAC;EACH,OAAO,EAAE,IAAI;EACb,IAAI,EAAE,kDAAkD,GACzD;;AAED,AAAA,CAAC,CAAC;EACA,KAAK,EAAE,OAAO,GACf;;AEPD,AACE,MADI,CACJ,EAAE,CAAA;EACA,OAAO,EAAE,MAAM;EACf,UAAU,EAAE,IAAI;EAChB,OAAO,EAAE,IAAI,GACd"
 }
