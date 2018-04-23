@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   },
   description: String,
   photo: String,
-  admin: String enlazar
+  admin: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 eventSchema.index({ location: "2dsphere" });
