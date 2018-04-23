@@ -61,7 +61,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   
 
 // default value for title local
-app.locals.title = 'Fiestit. Planifica un montón de fiestas';
+app.locals.title = 'Fiestit. Menudo montón de fiestas';
 
 
 // Enable authentication using session + passport
