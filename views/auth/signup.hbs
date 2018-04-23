@@ -1,15 +1,22 @@
 <!-- views/auth/signup.hbs -->
 <h2>Signup</h2>
 
-<form action="/auth/signup" method="POST" id="form-container">
+<form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
+  <input id="username" type="text" name="username" placeholder="Pepe">
 
+  <br><br>
+  <label for="email">Email</label>
+  <input id="email" type="text" name="email" placeholder="pepe@ironhack.es">
   <br><br>
 
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
+  <br><br>
+  <label for="photo">Photo</label>
+  <input id="photo" type="file" name="photo">
   <br>
+
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}
