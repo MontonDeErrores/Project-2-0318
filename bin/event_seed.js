@@ -15,8 +15,8 @@ mongoose
     return Event.create([
       {
         name: "Fiesta A",
-        date: 01-12-2018,
-        location: {type: "Point", coordinates: [40.3926422,-3.698123]},
+        date: 01 - 12 - 2018,
+        location: { type: "Point", coordinates: [40.3926422, -3.698123] },
         options: {
           hasPool: true,
           hasBBQ: false,
@@ -32,8 +32,8 @@ mongoose
       },
       {
         name: "Fiesta B",
-        date: 15-06-2018,
-        location: {type: "Point", coordinates: [40.4179591,-3.7165007]},
+        date: 15 - 06 - 2018,
+        location: { type: "Point", coordinates: [40.4179591, -3.7165007] },
         options: {
           hasPool: false,
           hasBBQ: false,
@@ -49,7 +49,7 @@ mongoose
       }
     ]);
   })
-  .then( () => mongoose.disconnect())
+  .then(() => mongoose.disconnect())
   .catch(err => {
     console.error("Error connecting to mongo", err);
-});
+  });

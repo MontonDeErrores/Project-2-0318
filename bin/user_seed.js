@@ -18,7 +18,7 @@ mongoose
         password: "1234",
         email: "a@a.es",
         photo: "http://res.cloudinary.com/ignlopezsanchez/image/upload/v1524492820/perfilPedro.png",
-        events: [{ type: Schema.Types.ObjectId, ref: 'Event' }] 
+        events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
       },
       {
         username: "Nacho",
@@ -29,7 +29,7 @@ mongoose
       }
     ]);
   })
-  .then( () => mongoose.disconnect())
+  .then(() => mongoose.disconnect())
   .catch(err => {
     console.error("Error connecting to mongo", err);
-});
+  });
