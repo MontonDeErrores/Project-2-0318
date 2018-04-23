@@ -5,4 +5,9 @@ body {
 a {
   color: #00B7FF; }
 
+header li {
+  display: inline;
+  list-style: none;
+  padding: 20px; }
+
 /*# sourceMappingURL=style.css.map */
