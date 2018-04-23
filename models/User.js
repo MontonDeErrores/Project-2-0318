@@ -6,7 +6,9 @@ const userSchema = new Schema({
   password: String,
   email: String,
   photo: String,
-  events: [{ type: Schema.Types.ObjectId, ref: 'Person' }]
+  gender: {type: String, enum: ["Man","Woman"]},
+  birthDate: Date,
+  events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
 }, {
   timestamps: {
     createdAt: 'created_at',

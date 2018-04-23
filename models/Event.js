@@ -9,14 +9,15 @@ const eventSchema = new Schema({
     hasPool: Boolean,
     hasBBQ: Boolean,
     hasChildren: Boolean,
-    hasWifi: String,
+    hasWifi: Boolean,
     isPrivate: Boolean,
     hasRoof: Boolean,
     hasParking: Boolean
   },
   description: String,
   photo: String,
-  admin: { type: Schema.Types.ObjectId, ref: 'User' }
+  admin: { type: Schema.Types.ObjectId, ref: 'User' },
+  isActive: Boolean
 });
 
 eventSchema.index({ location: "2dsphere" });

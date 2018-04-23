@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const authRoutes = express.Router();
 const User = require("../models/User");
+const Events = require("../models/Event");
 const uploadCloud = require("../config/cloudinary.js");
 
 // Bcrypt to encrypt passwords
@@ -64,5 +65,23 @@ authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+authRoutes.get("/new", (req, res) => {
+  req.logout();
+  res.render("auth/new");
+});
+
+
+//CRUD --- Retreive
+authRoutes.get("/profile/:id", (req, res) => {
+  User.findById(req.params.id)
+  .populate('events')
+  .then(eventAll => console.log(eventAll))
+    
+  
+});
+
+
+
 
 module.exports = authRoutes;
