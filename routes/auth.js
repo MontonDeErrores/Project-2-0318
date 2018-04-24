@@ -52,8 +52,8 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
 
-    const confirmationCode = bcrypt.hashSync(username, salt);
-    const hashPass = bcrypt.hashSync(password, salt);
+    // const confirmationCode = bcrypt.hashSync(username, salt);
+    // const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,

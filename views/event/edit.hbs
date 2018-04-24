@@ -1,3 +1,4 @@
+
 <div class="container">
     <div class="row">
       <div id="map"></div>
@@ -5,7 +6,7 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9sMOZtj7Sp4V7w9nZGmheBRXhDhSjveU"></script>
       <br>
       <br>
-      <form action="/event/new" method="POST" id="form-container" enctype="multipart/form-data">
+      <form action="/event/{{event._id}}/edit" method="POST" id="form-container" enctype="multipart/form-data">
         <label for="name">Name</label>
         <input id="name" type="text" name="name" placeholder="">
         <br>

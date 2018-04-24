@@ -39,18 +39,14 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
     location,
     options,
     admin: req.user.id});
-    console.log(newEvent);
   newEvent.save().then(event => {
 
     User.findById(req.user.id)
     .then((user) => {
-      console.log(user.events);
-      user.events.push(event._id);
-      console.log(user.events);
+      user.events.unshift(event._id);
       user.save()
       .then((user) =>{
-        console.log(user.events)
-        res.redirect(`/event/${event_id}`)
+        res.redirect(`/`)
 
       })
       .catch((err) => next(err))
@@ -62,11 +58,15 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
 });
 
 //CRUD --- Edit Event
-eventRoutes.get("/edit", ensureLoggedIn('/auth/login'), (req, res) => {
-  res.render("event/edit")
+eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
+  let id = req.params.id;
+  Events.findById(id).then((event) => {
+    res.render("event/edit", {event})
+
+  })
 });
 
-eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res) => {
+eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
   let id = req.params.id;
   const {name, description, date} = req.body;
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
@@ -87,7 +87,7 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
 
     Events.findByIdAndUpdate(id, updateEvent)
   .then((event) => {
-    res.redirect(`/event/${event_id}`);
+    res.redirect(`/`);
   })
   .catch(error => {
     next();
@@ -101,10 +101,7 @@ eventRoutes.get("/:id", ensureLoggedIn('/auth/login'), (req, res, next) => {
   let eventId = req.params.id;
   if (isInEvent(eventId, req.user)) {
     Events.findById(eventId).then(event => {
-      console.log(event);
       User.find({"events": eventId}).then(users => {
-        console.log(users);
-
         res.render("event/dashboard", {event, users} );
       })
   })
