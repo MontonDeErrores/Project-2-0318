@@ -1,35 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
+
   window.onload = () => {
-    const madrid = {
-      lat: 40.4378698,
-      lng: -3.8196207
+    let latitude = parseFloat($('#lat').text());    
+    console.log(latitude)
+    let longitude = parseFloat($('#long').text());
+    console.log(longitude)
+    const partyLocation = {
+      lat: latitude,
+      lng: longitude
     };
   
-    const markers = [];
+    
   
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 13,
-      center: madrid
+      center: partyLocation
     });
   
-    const center = {
-      lat: undefined,
-      lng: undefined
-    };
+    
   
-    locationPlaces.forEach(places => {
-      const pos = {
-        lat: places.location.coordinates[1],
-        lng: places.location.coordinates[0]
-      };
-      const pin = new google.maps.Marker({
-        position: pos,
-        map: map,
-        title: places.name
-      });
-      markers.push(pin);
+    const partyMaker = new google.maps.Marker({
+      position: {
+        lat: latitude,
+        lng: longitude
+      },
+      map: map,
+      title: "I'm here"
     });
+    // locationPlaces.forEach(places => {
+    //   const pos = {
+    //     lat: event.location.coordinates[1],
+    //     lng: event.location.coordinates[0]
+    //   };
+
+    //   const pin = new google.maps.Marker({
+    //     position: pos,
+    //     map: map,
+    //     title: places.name
+    //   });
+    //   markers.push(pin);
+    // });
   };
   console.log('IronGenerator JS imported successfully!');
 
 }, false);
+
+  
+

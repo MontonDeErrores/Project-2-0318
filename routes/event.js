@@ -9,6 +9,10 @@ const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
 const isAdmin = require('../middlewares/isAdmin');
 const isInEvent = require('../middlewares/isInEvent');
 
+eventRoutes.get('/new', (req, res, next) => {
+  res.render('event/new');
+});
+
 
 eventRoutes.get("/:id",ensureLoggedIn('/auth/login'), (req, res, next) => {
   let eventId = req.params.id;
@@ -27,5 +31,7 @@ eventRoutes.get("/:id",ensureLoggedIn('/auth/login'), (req, res, next) => {
   }
   
 });
+
+
 
 module.exports = eventRoutes;

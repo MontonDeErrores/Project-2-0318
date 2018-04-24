@@ -1,17 +1,29 @@
 <div>
   <h1>Fiesta: {{event.name}}</h1>
-  
+
   <h3>Description: {{event.description}}</h3>
-  
+
+
+  <div id="map"></div>
+
   <ul>
     <li>Pool: {{event.options.hasPool}}</li>
     <li>BBQ: {{event.options.hasBBQ}}</li>
     <li>Children: {{event.options.hasChildren}}</li>
-    <li>Private:  {{event.options.isPrivate}}</li>
-    <li>Roof:  {{event.options.hasRoof}}</li>
+    <li>Private: {{event.options.isPrivate}}</li>
+    <li>Roof: {{event.options.hasRoof}}</li>
     <li>Parking: {{event.options.hasParking}}</li>
+    <li>
+      latitude:
+      <span id="lat">{{event.location.coordinates.[0]}}</span>
+    </li>
+    <li>
+      longitude:
+      <span id="long">{{event.location.coordinates.[1]}}</span>
+    </li>
+
   </ul>
-  
+
 </div>
 
 <div>
@@ -19,7 +31,7 @@
   <ul>
     {{#each users}}
 
-      <li>{{username}}</li>
+    <li>{{username}}</li>
 
     {{/each }}
 
@@ -32,4 +44,3 @@
 
 
 </div>
-
