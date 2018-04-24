@@ -5,6 +5,10 @@ const User = require("../models/User");
 const Events = require("../models/Event");
 const uploadCloud = require("../config/cloudinary.js");
 const sendMail = require("../mail/sendMail");
+const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
+const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
+const isAdmin = require('../middlewares/isAdmin');
+const isInEvent = require('../middlewares/isInEvent');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -44,6 +48,8 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
       res.render("auth/signup", { message: "The username already exists" });
       return;
     }
+    const confirmationCode = bcrypt.hashSync(username, salt);
+    const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,
@@ -52,8 +58,7 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
       photo
     });
 
-    const confirmationCode = bcrypt.hashSync(username, salt);
-    const hashPass = bcrypt.hashSync(password, salt);
+    
     
     newUser.save((err) => {
       if (err) {
@@ -84,9 +89,10 @@ authRoutes.get("/new", (req, res) => {
 });
 
 
-//CRUD --- Retreive
-authRoutes.get("/profile/:id", (req, res) => {
-  User.findById(req.params.id)
+//CRUD --- Retreive profile
+authRoutes.get("/profile/", ensureLoggedIn('/auth/login'), (req, res) => {
+  let id = req.user.id;
+  User.findById(id)
     .populate('events')
     .then(eventAll => {
       console.log(eventAll);
@@ -94,6 +100,22 @@ authRoutes.get("/profile/:id", (req, res) => {
     })
 });
 
+//CRUD --- edit profile
+authRoutes.post("/profile", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res) => {
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  let id = req.user.id;
+  const {username, email, password} = req.body;
+  const photo = req.file.url;
+  const hashPass = bcrypt.hashSync(password, salt);
+  const editUser = {username, email, password: hashPass, photo};
+  User.findByIdAndUpdate(id, editUser)
+  .then(() => {
+    res.redirect(`/auth/profile/`);
+  })
+  .catch(error => {
+    next();
+  })
+});
 
 
 
