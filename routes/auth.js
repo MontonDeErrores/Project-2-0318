@@ -76,7 +76,10 @@ authRoutes.get("/new", (req, res) => {
 authRoutes.get("/profile/:id", (req, res) => {
   User.findById(req.params.id)
   .populate('events')
-  .then(eventAll => console.log(eventAll))
+  .then(eventAll => {
+    console.log(eventAll)
+    res.render("auth/profile")
+  })
     
   
 });
