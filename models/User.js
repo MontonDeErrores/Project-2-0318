@@ -8,7 +8,7 @@ const userSchema = new Schema({
   photo: String,
   gender: {type: String, enum: ["Man","Woman"]},
   birthDate: Date,
-  events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
+   events:  [{ type: Schema.Types.ObjectId, ref: 'Event' }]
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -55,11 +55,11 @@ authRoutes.post("/signup", uploadCloud.single("photo"),(req, res, next) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        sendEmail(newUser.email, newUser.confirmationCode)
-          .then(() => {
+        // sendEmail(newUser.email, newUser.confirmationCode)
+        //   .then(() => {
             console.log("Console log en el authjs linea 60");
             res.redirect("/");
-})
+// })
       }
     });
   });

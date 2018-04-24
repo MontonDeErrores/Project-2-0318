@@ -7,13 +7,25 @@ const uploadCloud = require("../config/cloudinary.js");
 const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
 const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
 const isAdmin = require('../middlewares/isAdmin');
+const isInEvent = require('../middlewares/isInEvent');
 
 
-authRoutes.get("/:id",ensureLoggedIn('/auth/login'), (req, res, next) => {
+
+eventRoutes.get("/:id", (req, res, next) => {
   let eventId = req.params.id;
-  Events.findById(eventId).then(event => {
-    res.render("event/dashboard", {event}, { "message": req.flash("error") });
+  if (isInEvent(eventId, req.user)) {
+    Events.findById(eventId).then(event => {
+      console.log(event);
+      User.find({"events": eventId}).then(users => {
+        console.log(users);
+
+        res.render("event/dashboard", {event, users} );
+      })
   })
+}
+  else {
+    res.redirect("/")
+  }
   
 });
 

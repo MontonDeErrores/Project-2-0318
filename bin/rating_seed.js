@@ -15,8 +15,8 @@ mongoose
     console.log("Connected to Mongo!");
     return Rating.create([
       {
-      userRated: "5added6d68227b0cca8abe4e",
-      userRating: "5added6d68227b0cca8abe4d",
+      userRated: "5adf02c6abe10930cccf72be",
+      userRating: "5adf02c6abe10930cccf72bf",
       rating: "Very Good",
       comment: "Menuda fiestaca, me cagaria en la leche!"
       }

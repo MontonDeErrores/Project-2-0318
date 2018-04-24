@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   },
   description: String,
   photo: String,
-  admin: { type: Schema.Types.ObjectId, ref: 'User' },
+  admin:  { type: Schema.Types.ObjectId, ref: 'User' },
   isActive: Boolean
 });
 
