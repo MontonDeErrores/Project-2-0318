@@ -1,5 +1,6 @@
 <div>
   <h1>Fiesta: <span id="partyname">{{event.name}}</span></h1>
+  <img src="{{event.photo}}" alt="event photo">
 
   <h3>Description: {{event.description}}</h3>
 
@@ -35,12 +36,7 @@
 
     {{/each }}
 
-
-
   </ul>
 
-
-
-
-
 </div>
+<h3><a href="/event/{{event._id}}/edit">Edit event</a></h3>

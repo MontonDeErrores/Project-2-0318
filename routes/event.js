@@ -8,6 +8,8 @@ const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
 const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
 const isAdmin = require('../middlewares/isAdmin');
 const isInEvent = require('../middlewares/isInEvent');
+const isCreator = require('../middlewares/isCreator');
+
 
 eventRoutes.get('/new', (req, res, next) => {
   res.render('event/new');
@@ -20,7 +22,6 @@ eventRoutes.get("/new", ensureLoggedIn('/auth/login'), (req, res) => {
   res.render("event/new")
 });
 
-// CRUD --- New Event
 eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
   const {name, description, date} = req.body;
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
@@ -60,9 +61,15 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
 //CRUD --- Edit Event
 eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
   let id = req.params.id;
-  Events.findById(id).then((event) => {
-    res.render("event/edit", {event})
-
+  isCreator(id, req.user.id).then((creator)=>{
+    if (creator){
+      Events.findById(id).then((event) => {
+      res.render("event/edit", {event})
+      })
+    }
+    else {
+      res.redirect("/")
+    }
   })
 });
 
@@ -92,6 +99,7 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
   .catch(error => {
     next();
   })
+
 });
 
 
