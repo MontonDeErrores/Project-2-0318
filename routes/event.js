@@ -17,11 +17,4 @@ eventRoutes.get("/:id",ensureLoggedIn('/auth/login'), (req, res, next) => {
   
 });
 
-
-
-
-
-
-
-
 module.exports = eventRoutes;

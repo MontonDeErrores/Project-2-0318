@@ -1,10 +1,10 @@
 //const mjmlUtils = require("mjml-utils");
 const transporter = require("./transporterGmail");
 const path = require("path");
-// const pathToHtmlEmailTemplate = path.join(
-//   __dirname,
-//   "./mail_templates/welcome_mail.html"
-// );
+  // const pathToHtmlEmailTemplate = path.join(
+  //   __dirname,
+  //   "./mail_templates/welcome_mail.html"
+  // );
 
 const sendMail = (to, confirmationCode, from = "fiestit@gmail.com") => {
   // return mjmlUtils

@@ -1,9 +1,33 @@
 <div class="container">
   <div class="row">
     <div id="map"></div>
-    
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9sMOZtj7Sp4V7w9nZGmheBRXhDhSjveU"></script>
+    <br>
+    <br>
+    <form action="event/new" method="POST" id="form-container">
+      <label for="name">Name</label>
+      <input id="name" type="text" name="name" placeholder="">
+      <br>
+      <br>
+      <label for="kind">Kind</label>
+      <input id="kind" type="text" name="kind" placeholder="">
+      <br>
+      <br>
+      <label for="Latitude">Latitude</label>
+      <input id="Latitude" type="text" name="Latitude" placeholder="">
+      <br>
+      <br>
+      <label for="Longitude">Longitude</label>
+      <input id="Longitude" type="text" name="Longitude" placeholder="">
+      <br>
+      <br>
+      <button>Create place</button>
+
+    </form>
+
     <p>Photo of the party</p>
-    
+
     <ul>
       <li>hasPool</li>
       <li>hasBBQ</li>
@@ -13,11 +37,11 @@
       <li>hasRoof</li>
       <li>hasParking</li>
     </ul>
-    
+
     <p>Description</p>
     <p>Date</p>
     <p>Evento creado por: Admin</p>
-    
+
     <button>Invita a un amigo</button>
   </div>
 </div>
