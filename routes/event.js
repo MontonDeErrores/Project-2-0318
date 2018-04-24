@@ -9,7 +9,7 @@ const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
 const isAdmin = require('../middlewares/isAdmin');
 
 
-authRoutes.get("/:id",ensureLoggedIn('/auth/login'), (req, res, next) => {
+eventRoutes.get("/:id",ensureLoggedIn('/auth/login'), (req, res, next) => {
   let eventId = req.params.id;
   Events.findById(eventId).then(event => {
     res.render("event/dashboard", {event}, { "message": req.flash("error") });

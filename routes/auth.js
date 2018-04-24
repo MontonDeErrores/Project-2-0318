@@ -4,6 +4,7 @@ const authRoutes = express.Router();
 const User = require("../models/User");
 const Events = require("../models/Event");
 const uploadCloud = require("../config/cloudinary.js");
+const sendMail = require("../mail/sendMail");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -25,11 +26,14 @@ authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-authRoutes.post("/signup", uploadCloud.single("photo"),(req, res, next) => {
+authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
+  const salt = bcrypt.genSaltSync(bcryptSalt);
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
   const photo = req.file.url;
+  const confirmationCode = bcrypt.hashSync(username, salt);
+
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -53,13 +57,17 @@ authRoutes.post("/signup", uploadCloud.single("photo"),(req, res, next) => {
 
     newUser.save((err) => {
       if (err) {
+        console.log("Error save")
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        sendEmail(newUser.email, newUser.confirmationCode)
+        console.log(11)
+        sendMail(newUser.email, newUser.confirmationCode)
           .then(() => {
             console.log("Console log en el authjs linea 60");
+            console.log(confirmationCode)
+            console.log(newUser.confirmationCode)
             res.redirect("/");
-})
+          })
       }
     });
   });
@@ -79,11 +87,11 @@ authRoutes.get("/new", (req, res) => {
 //CRUD --- Retreive
 authRoutes.get("/profile/:id", (req, res) => {
   User.findById(req.params.id)
-  .populate('events')
-  .then(eventAll => {
-    console.log(eventAll);
-    res.render("auth/profile", {eventAll})
-  })
+    .populate('events')
+    .then(eventAll => {
+      console.log(eventAll);
+      res.render("auth/profile", { eventAll })
+    })
 });
 
 
