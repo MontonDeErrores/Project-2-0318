@@ -55,7 +55,11 @@ authRoutes.post("/signup", uploadCloud.single("photo"),(req, res, next) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        res.redirect("/");
+        sendEmail(newUser.email, newUser.confirmationCode)
+          .then(() => {
+            console.log("Console log en el authjs linea 60");
+            res.redirect("/");
+})
       }
     });
   });
@@ -76,9 +80,10 @@ authRoutes.get("/new", (req, res) => {
 authRoutes.get("/profile/:id", (req, res) => {
   User.findById(req.params.id)
   .populate('events')
-  .then(eventAll => console.log(eventAll))
-    
-  
+  .then(eventAll => {
+    console.log(eventAll);
+    res.render("auth/profile", {eventAll})
+  })
 });
 
 

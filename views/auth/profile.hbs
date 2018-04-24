@@ -1,48 +1,44 @@
 <div>
   <div>
-    <h1>{{user.username} profile</h1>
-    <img src="#" alt="foto de perfil">
-    
+    <h1>{{eventAll.username}} profile</h1>
+    <img src="{{eventAll.photo}}" alt="foto de perfil" width=200>
+
     <form action="/auth/profile" method="POST" id="form-container" enctype="multipart/form-data">
       <label for="username">Change username</label>
-      <input id="username" type="text" name="username" placeholder="{{user.username}}">
-    
-      <br><br>
+      <input id="username" type="text" name="username" placeholder="{{eventAll.username}}">
+
+      <br>
+      <br>
       <label for="email">Change email</label>
-      <input id="email" type="text" name="email" placeholder="{{user.email}}">
-      <br><br>
-    
+      <input id="email" type="text" name="email" placeholder="{{eventAll.email}}">
+      <br>
+      <br>
+
       <label for="password">Change password</label>
-      <input id="password" type="password" name="password" placeholder="{{user.password}}">
-      <br><br>
+      <input id="password" type="password" name="password" placeholder="{{eventAll.password}}">
+      <br>
+      <br>
       <label for="photo">Change photo</label>
       <input id="photo" type="file" name="photo">
-   
-    
-      <br><br>
-    
-      <button>Create account</button>
-    
-  
+
+
+      <br>
+      <br>
+
+      <button>Edit account</button>
+
+
       </p>
     </form>
-    
-  
-
-
-  
   </div>
-  
-  
-  
-  
-  
-  <div>
-      <h1>Próximos eventos</h1>
-      <ul>
-      {{#each events}}
 
-        <li>{{events.name}}</li>
+
+  <div>
+    <h1>Próximos eventos</h1>
+    <ul>
+      {{#each eventAll.events}}
+
+      <li>{{name}}</li>
 
       {{/each}}
     </ul>
@@ -50,6 +46,6 @@
     <div>amigossssssssssss</div>
     <a href="#">Crear fiesta</a>
 
-    
+
   </div>
 </div>
