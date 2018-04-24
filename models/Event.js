@@ -6,18 +6,18 @@ const eventSchema = new Schema({
   date: Date,
   location: { type: { type: String }, coordinates: [Number] },
   options: {
-    hasPool: Boolean,
-    hasBBQ: Boolean,
-    hasChildren: Boolean,
-    hasWifi: Boolean,
-    isPrivate: Boolean,
-    hasRoof: Boolean,
-    hasParking: Boolean
+    hasPool: {type: Boolean, default: false},
+    hasBBQ: {type: Boolean, default: false},
+    hasChildren: {type: Boolean, default: false},
+    hasWifi: {type: Boolean, default: false},
+    isPrivate: {type: Boolean, default: false},
+    hasRoof: {type: Boolean, default: false},
+    hasParking: {type: Boolean, default: false}
   },
   description: String,
   photo: String,
   admin:  { type: Schema.Types.ObjectId, ref: 'User' },
-  isActive: Boolean
+  isActive: {type: Boolean, default: true}
 });
 
 eventSchema.index({ location: "2dsphere" });
