@@ -141,10 +141,15 @@ eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) 
   User.findOne({"email": mail} )
   .then((user)=>{
       user.events.unshift(req.params.id);
+      var uniqueArray = function(arrArg) {               //si invitas a la misma persona varias veces, se eliminan duplicados del array evetns
+        return arrArg.filter(function(elem, pos,arr) {
+          return arr.indexOf(elem) == pos;
+        });
+      };
+      user.events = uniqueArray(user.events);
       user.save().then(()=>{
       res.redirect(`/event/${partyId}`)
       })
-
   })
   .catch((err)=>{
     console.log(err);
