@@ -58,6 +58,23 @@ html, body {
   border: 1px solid black;
   transition: all .15s linear; }
 
+.ocultar-lat-long {
+  display: none; }
+
+.img-dashboard {
+  width: 400px;
+  display: inline; }
+
+.listado-asistentes {
+  list-style-type: none;
+  font-size: 2em; }
+
+.img-profile {
+  width: 400px; }
+
+.apartar {
+  padding: 100px; }
+
 header li {
   display: inline;
   list-style: none;

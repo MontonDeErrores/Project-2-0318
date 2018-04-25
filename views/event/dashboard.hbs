@@ -1,42 +1,57 @@
-<div>
-  <h1>Fiesta: <span id="partyname">{{event.name}}</span></h1>
-  <img src="{{event.photo}}" alt="event photo">
-
-  <h3>Description: {{event.description}}</h3>
+<div class="container">
+  <div>
+    <h2><span id="partyname">{{event.name}}</span></h2>
+    <img class="img-dashboard" src="{{event.photo}}" alt="event photo">
   
-  <div id="map"></div>
-
   
-  <ul>
-    <li>Pool: {{event.options.hasPool}}</li>
-    <li>BBQ: {{event.options.hasBBQ}}</li>
-    <li>Children: {{event.options.hasChildren}}</li>
-    <li>Private: {{event.options.isPrivate}}</li>
-    <li>Roof: {{event.options.hasRoof}}</li>
-    <li>Parking: {{event.options.hasParking}}</li>
-    <li>
-      latitude:
-      <span id="lat">{{event.location.coordinates.[0]}}</span>
-    </li>
-    <li>
-      longitude:
-      <span id="long">{{event.location.coordinates.[1]}}</span>
-    </li>
-
-  </ul>
-
+    <p name="description">{{event.description}}</p>
+    <div id="map"></div>
+  
+    
+    <ul>
+      <label for="pool">Pool: </label>
+      <input id="pool" name="pool" type="checkbox" {{#if event.options.hasPool }} checked {{/if}} disabled>
+  
+      <label for="bbq">BBQ: </label>
+      <input id="bbq" name="bbq" type="checkbox" {{#if event.options.hasBBQ }} checked {{/if}} disabled>
+  
+      <label for="children">Children: </label>
+      <input id="children" name="children" type="checkbox" {{#if event.options.hasChildren }} checked {{/if}} disabled>
+  
+      <label for="private">Private: </label>
+      <input id="private" name="private" type="checkbox" {{#if event.options.isPrivate }} checked {{/if}} disabled>
+  
+      <label for="roof">Roof: </label>
+      <input id="roof" name="roof" type="checkbox" {{#if event.options.hasRoof }} checked {{/if}} disabled>
+  
+      <label for="parking">Parking: </label>
+      <input id="parking" name="parking" type="checkbox" {{#if event.options.hasParking }} checked {{/if}} disabled>
+  
+      <li class="ocultar-lat-long">
+        latitude:
+        <span id="lat">{{event.location.coordinates.[0]}}</span>
+      </li>
+      <li class="ocultar-lat-long">
+        longitude:
+        <span id="long">{{event.location.coordinates.[1]}}</span>
+      </li>
+  
+    </ul>
+  
+  </div>
+  
+  <div>
+    <h4>Asistentes</h4>
+    <ul>
+      {{#each users}}
+  
+      <li class="listado-asistentes" >{{username}}</li>
+  
+      {{/each }}
+  
+    </ul>
+  
+  </div>
+  <a class="btn btn-primary" href="/event/{{event._id}}/edit" role="button">Editar fiesta</a>
+  
 </div>
-
-<div>
-  <h1>Lista de invitados</h1>
-  <ul>
-    {{#each users}}
-
-    <li>{{username}}</li>
-
-    {{/each }}
-
-  </ul>
-
-</div>
-<h3><a href="/event/{{event._id}}/edit">Edit event</a></h3>

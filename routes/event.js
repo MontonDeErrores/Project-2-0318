@@ -37,7 +37,7 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
   }
   let location = {
     type: "Point",
-    coordinates: [req.body.longitude, req.body.latitude]
+    coordinates: [req.body.latitude, req.body.longitude]
   };
   
   const newEvent = new Events({
