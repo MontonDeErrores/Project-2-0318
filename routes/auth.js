@@ -97,8 +97,7 @@ authRoutes.get("/profile/", ensureLoggedIn('/auth/login'), (req, res) => {
   User.findById(id)
     .populate('events')
     .then(eventAll => {
-      console.log(eventAll);
-      res.render("auth/profile", { eventAll })
+      res.render("auth/profile", {eventAll})
     })
 });
 
