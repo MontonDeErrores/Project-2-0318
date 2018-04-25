@@ -9,6 +9,8 @@ const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
 const isAdmin = require('../middlewares/isAdmin');
 const isInEvent = require('../middlewares/isInEvent');
 const isCreator = require('../middlewares/isCreator');
+const sendMail = require("../mail/sendMail");
+
 
 
 eventRoutes.get('/new', (req, res, next) => {
@@ -100,7 +102,7 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
   const options = {hasPool: pool, hasBBQ: bbq, hasChildren: children, hasWifi: wifi, isPrivate: private, hasRoof: roof, hasParking: parking};
   let location = {
     type: "Point",
-    coordinates: [req.body.longitude, req.body.latitude]
+    coordinates: [ req.body.latitude, req.body.longitude]
   };    
 
   if (req.file){
@@ -124,7 +126,7 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
 
     Events.findByIdAndUpdate(id, updateEvent)
   .then((event) => {
-    res.redirect(`/`);
+    res.redirect(`/event/${id}`);
   })
   .catch(error => {
     console.log(error);
@@ -132,8 +134,25 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
   })
   
 });
+//CRUD --- Event invite friends
+eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) => {
+  const partyId = req.params.id;
+  const mail = req.body.inviteMail;
+  User.findOne({"email": mail} )
+  .then((user)=>{
+      user.events.unshift(req.params.id);
+      user.save().then(()=>{
+      res.redirect(`/event/${partyId}`)
+      })
 
+  })
+  .catch((err)=>{
+    console.log(err);
+    next();
 
+  })
+
+})
 
 //CRUD --- Event profile
 eventRoutes.get("/:id", ensureLoggedIn('/auth/login'), (req, res, next) => {

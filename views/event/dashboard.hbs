@@ -51,6 +51,15 @@
   
     </ul>
   
+    <form action="/event/{{event._id}}/invite" method="POST" id="form-container">
+      <label for="inviteMail">Mail</label>
+      <input id="inviteMail" type="mail" name="inviteMail">
+     
+      <button>Invitar</button>
+
+    </form>
+
+
   </div>
   <a class="btn btn-primary" href="/event/{{event._id}}/edit" role="button">Editar fiesta</a>
   
