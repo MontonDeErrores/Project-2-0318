@@ -35,7 +35,17 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  const photo = req.file.url;
+  if (req.file){
+    photo = req.file.url;
+
+ }
+ else{
+   photo = "http://res.cloudinary.com/ignlopezsanchez/image/upload/v1524656034/partyHard.png";
+ }
+ let location = {
+   type: "Point",
+   coordinates: [req.body.latitude, req.body.longitude]
+ };
 
 
   if (username === "" || password === "") {
@@ -50,11 +60,6 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
     }
     const confirmationCode = bcrypt.hashSync(username, salt);
     const hashPass = bcrypt.hashSync(password, salt);
-
-
-    // const confirmationCode = bcrypt.hashSync(username, salt);
-    // const hashPass = bcrypt.hashSync(password, salt);
-
     const newUser = new User({
       username,
       email,
@@ -106,9 +111,15 @@ authRoutes.post("/profile", [ensureLoggedIn('/auth/login'), uploadCloud.single("
   const salt = bcrypt.genSaltSync(bcryptSalt);
   let id = req.user.id;
   const {username, email, password} = req.body;
-  const photo = req.file.url;
   const hashPass = bcrypt.hashSync(password, salt);
-  const editUser = {username, email, password: hashPass, photo};
+  if (req.file){
+    var photo = req.file.url;
+    var editUser = {username, email, password: hashPass, photo};
+  }
+  else{
+  var editUser = {username, email, password: hashPass};
+  }
+
   User.findByIdAndUpdate(id, editUser)
   .then(() => {
     res.redirect(`/auth/profile/`);

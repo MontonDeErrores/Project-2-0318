@@ -1,51 +1,51 @@
-<div>
-  <div>
-    <h1>{{eventAll.username}} profile</h1>
-    <img src="{{eventAll.photo}}" alt="foto de perfil" width=200>
-
-    <form action="/auth/profile" method="POST" id="form-container" enctype="multipart/form-data">
-      <label for="username">Change username</label>
-      <input id="username" type="text" name="username" value="{{eventAll.username}}">
-
-      <br>
-      <br>
-      <label for="email">Change email</label>
-      <input id="email" type="text" name="email" value="{{eventAll.email}}">
-      <br>
-      <br>
-
-      <label for="password">Change password</label>
-      <input id="password" type="password" name="password" placeholder="password">
-      <br>
-      <br>
-      <label for="photo">Change photo</label>
-      <input id="photo" type="file" name="photo">
-
-
-      <br>
-      <br>
-
-      <button>Edit account</button>
-
-
-      </p>
-    </form>
-  </div>
-
-
-  <div>
-    <h1>Próximos eventos</h1>
-    <ul>
-      {{#each eventAll.events}}
-
-      <li><a href="/event/{{id}}">{{name}}</a></li>
-
-      {{/each}}
-    </ul>
-    <div>mapaaaaaaa</div>
-    <div>amigossssssssssss</div>
-    <a href="/event/new">Crear fiesta</a>
-
-
+<div class="container">
+  <div class="row">
+    <div class="sm-col-6 apartar">
+      <h1>{{eventAll.username}}</h1>
+      <img class="img-profile" src="{{eventAll.photo}}" alt="foto de perfil">
+  
+      <form action="/auth/profile" method="POST" id="form-container" enctype="multipart/form-data">
+        <label for="username">Cambiar nombre de usuario</label>
+        <input id="username" type="text" name="username" value="{{eventAll.username}}">
+  
+        <br>
+        <br>
+        <label for="email">Cambiar correo</label>
+        <input id="email" type="text" name="email" value="{{eventAll.email}}">
+        <br>
+        <br>
+  
+        <label for="password">Cambiar contraseña</label>
+        <input id="password" type="password" name="password" placeholder="password">
+        <br>
+        <br>
+        <label for="photo">Cambiar foto</label>
+        <input id="photo" type="file" name="photo">
+  
+  
+        <br>
+        <br>
+  
+        <button>Guardar cambios</button>
+  
+  
+        
+      </form>
+    </div>
+  
+  
+    <div class="sm-col-6 apartar">
+      <h1>Próximos eventos</h1>
+      <ul>
+        {{#each eventAll.events}}
+  
+        <li class="listado-asistentes"><a href="/event/{{id}}">{{name}}</a></li>
+  
+        {{/each}}
+      </ul>
+      
+      <a class="btn btn-primary" href="/event/new" role="button">Crear fiesta</a>
+  
+    </div>
   </div>
 </div>

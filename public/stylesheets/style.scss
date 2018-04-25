@@ -144,6 +144,23 @@ main {
   border-top-right-radius: 0;
 }
 
+.ocultar-lat-long{
+  display: none;
+}
+.img-dashboard{
+  width: 400px;
+  display: inline;
+}
+.listado-asistentes{
+  list-style-type: none;
+  font-size: 2em;
+}
+.img-profile{
+  width: 400px;
+}
+.apartar{
+  padding: 100px;
+}
 @import "variables";
 @import "header";
 @import "footer";
