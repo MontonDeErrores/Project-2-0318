@@ -7,5 +7,4 @@ const transporter = nodemailer.createTransport({
       pass: '1234FiestitIronhack' 
     }
 });
-
 module.exports = transporter;

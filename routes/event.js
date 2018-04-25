@@ -23,10 +23,18 @@ eventRoutes.get("/new", ensureLoggedIn('/auth/login'), (req, res) => {
 });
 
 eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
-  const {name, description, date} = req.body;
+  let date = req.body.date;
+ 
+  const {name, description} = req.body;
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
   const options = {hasPool: pool, hasBBQ: bbq, hasChildren: children, hasWifi: wifi, isPrivate: private, hasRoof: roof, hasParking: parking};
-  const photo = req.file.url;
+  if (req.file){
+     photo = req.file.url;
+
+  }
+  else{
+    photo = "http://res.cloudinary.com/ignlopezsanchez/image/upload/v1524656034/partyHard.png";
+  }
   let location = {
     type: "Point",
     coordinates: [req.body.longitude, req.body.latitude]
@@ -60,11 +68,22 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
 
 //CRUD --- Edit Event
 eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
+  
   let id = req.params.id;
   isCreator(id, req.user.id).then((creator)=>{
     if (creator){
       Events.findById(id).then((event) => {
-      res.render("event/edit", {event})
+        let date = event.date;        
+        date = date.toLocaleString().split(" ")[0].split("-").map((e, i)=>{
+          if (e.length < 2 && i>0){
+            return "0"+e
+          }
+          return e;
+        }).join("-");
+      res.render("event/edit", {event, date})
+      })
+      .catch((err)=>{
+        console.log(err);
       })
     }
     else {
@@ -76,30 +95,42 @@ eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
 eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
   let id = req.params.id;
   const {name, description, date} = req.body;
+  console.log(req.body);
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
   const options = {hasPool: pool, hasBBQ: bbq, hasChildren: children, hasWifi: wifi, isPrivate: private, hasRoof: roof, hasParking: parking};
-  const photo = req.file.url;
   let location = {
     type: "Point",
     coordinates: [req.body.longitude, req.body.latitude]
-  };
-  
-  const updateEvent = {
-    name,
-    description,
-    photo,
-    date,
-    location,
-    options};
+  };    
+
+  if (req.file){
+      var photo = req.file.url;
+      var updateEvent = {
+        name,
+        description,
+        photo,
+        date,
+        location,
+        options};
+  }
+  else{
+    var updateEvent = {
+      name,
+      description,
+      date,
+      location,
+      options};
+  }
 
     Events.findByIdAndUpdate(id, updateEvent)
   .then((event) => {
     res.redirect(`/`);
   })
   .catch(error => {
+    console.log(error);
     next();
   })
-
+  
 });
 
 
