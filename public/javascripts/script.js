@@ -100,59 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
-
-
-
-
-    //Try HTML5 geolocation.
-    // var infoWindow = new google.maps.InfoWindow({ map: map });
-
-
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(function (position) {
-    //     var pos = {
-    //       lat: position.coords.latitude,
-    //       lng: position.coords.longitude
-    //     };
-    //     //console.log(pos)
-    //     infoWindow.setPosition(pos);
-    //     infoWindow.setContent('<b>Posicion fiestil detectada, mandando farra...</b>');
-    //     map.setCenter(pos);
-    //     var marker = new google.maps.Marker({
-
-    //       position: {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //       },
-    //       map: map,
-    //       draggable: true
-    //     });
-    //     marker.addListener('dragend', function () {
-    //       // Do something with the positions here
-    //       // once the user has finished dragging the marker
-    //       //console.log(marker.getPosition().lat());
-    //       //console.log(marker.getPosition().lng()); 
-    //       $("#latitude").val(marker.getPosition().lat());
-    //       $("#longitude").val(marker.getPosition().lng());
-    //     });
-
-    //   }, function () {
-    //     handleLocationError(true, infoWindow, map.getCenter());
-    //   });
-    // } else {
-    //   // Browser doesn't support Geolocation
-    //   handleLocationError(false, infoWindow, map.getCenter());
-    // }
-
-    // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    //   infoWindow.setPosition(pos);
-    //   infoWindow.setContent(browserHasGeolocation ?
-    //     'Error: The Geolocation service failed.' :
-    //     'Error: Your browser doesn\'t support geolocation.');
-
-    // }
-
-
   };
   console.log('IronGenerator JS imported successfully!');
 
