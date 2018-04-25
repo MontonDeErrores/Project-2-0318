@@ -1,20 +1,44 @@
+<form class="form-signin" action="/auth/login" method="POST" id="form-container">
 
-<h2>Login</h2>
+  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">FiestiLogin</h1>
+
+  <label for="username" class="sr-only">Nombre de usuario</label>
+  <input type="text" id="username" name="username" class="form-control" placeholder="Nombre de usuario" required autofocus>
+
+  <label for="password" class="sr-only">Password</label>
+  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+
+
+  <p class="account-message">
+      ¿No tienes cuenta?
+      <a href="/auth/login">Signup</a>
+    </p>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</form>
+
+
+
+
+
+<!-- <h2>Login</h2>
 
 <form action="/auth/login" method="POST" id="form-container">
   <label for="username">Username</label>
   <input id="username" type="text" name="username" placeholder="JonSnow">
 
-  <br><br>
+  <br>
+  <br>
 
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
-  <br>
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
+  <br> {{#if message }}
+  <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <br><br>
+  <br>
+  <br>
 
   <button>Login</button>
 
@@ -22,4 +46,4 @@
     Don't have an account yet?
     <a href="/auth/login">Signup</a>
   </p>
-</form>
+</form> -->

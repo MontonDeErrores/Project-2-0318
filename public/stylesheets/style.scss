@@ -28,6 +28,37 @@ brand {
   font-weight: bold;
 }
 
+main {
+  padding-top: 60px;
+}
+
+.w-100 {
+  width: 400px;
+  object-fit: cover;
+  height: 600px;
+}
+
+.fwidgets {
+  background-color: #ed564b;;
+  color: white;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.widget span {
+  border: 5px solid #fff;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  display: block;
+  line-height: 65px;
+  text-align: center;
+  margin: 0px auto;
+  font-size: 20px;
+
+}
+
 #mainnav {
   background-color: #b3ccff;
 }
@@ -74,7 +105,44 @@ brand {
   transition: all .15s linear;
 }  
 
+.footer {
+  background-color: #b3ccff;
+}
 
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin input[type="file"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
 @import "variables";
 @import "header";

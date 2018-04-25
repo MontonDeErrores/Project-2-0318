@@ -1,5 +1,46 @@
+<form class="form-signin" action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
+
+  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">FiestiSignup</h1>
+
+  <label for="username" class="sr-only">Nombre de usuario</label>
+  <input type="text" id="username" name="username" class="form-control" placeholder="Nombre de usuario" required autofocus>
+
+  <label for="email" class="sr-only">Email</label>
+  <input type="email" id="email" name="email" class="form-control" placeholder="pepe@ironhack.es" required autofocus>
+
+  <label for="password" class="sr-only">Password</label>
+  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+
+  <!-- <label for="photo" >Foto de perfil:</label>
+  <input id="photo" type="file" name="photo"> -->
+
+  <div class="input-group-prepend">
+    <span class="input-group-text">Upload</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="photo" name="photo">
+    <label class="custom-file-label" for="inputGroupFile01">Elige foto</label>
+  </div>
+  </div>
+
+  <div class="error">
+    {{#if message }}
+    <div class="error-message">{{ message }}</div>
+    {{/if}}
+  </div>
+
+  <p class="account-message">
+    ¿Ya tienes cuenta?
+    <a href="/auth/login">Login</a>
+  </p>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</form>
+
+
 <!-- views/auth/signup.hbs -->
-<h2>Signup</h2>
+<!-- <h2>Signup</h2>
 
 <form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
   <label for="username">Username</label>
@@ -29,4 +70,4 @@
     Do you already have an account?
     <a href="/auth/login">Login</a>
   </p>
-</form>
+</form> -->
