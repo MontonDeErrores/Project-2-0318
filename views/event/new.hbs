@@ -3,9 +3,16 @@
     <div id="map"></div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9sMOZtj7Sp4V7w9nZGmheBRXhDhSjveU"></script>
-    <br>
-    <br>
+    
+    <div id="floating-panel">
+      <input id="address" type="textbox" value="Madrid">
+      <input id="submit" type="button" value="Buscar sitio...">
+    </div>
+
     <form action="/event/new" method="POST" id="form-container" enctype="multipart/form-data">
+      
+      <br>
+      <br>
       <label for="name">Name</label>
       <input id="name" type="text" name="name" placeholder="">
       <br>
@@ -27,7 +34,7 @@
       <br>
       <br>
       <label for="longitude">Longitude</label>
-      <input id="longitude" type="text" name="longitude" placeholder="">
+      <input id="longitude" type="text" name="longitude" placeholder="{{results.[0].geometry.location}}">
       <br>
       <br>
       <label for="pool">Pool: </label>
