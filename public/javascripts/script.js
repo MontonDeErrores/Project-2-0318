@@ -2,22 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.onload = () => {
     let partyName = $('#partyname').text();
-    let latitude = parseFloat($('#lat').text());
+    var markers = [];
+
+    function setMapOnAll(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+
+    function clearMarkers() {
+      setMapOnAll(null);
+    }
+
+    function deleteMarkers() {
+      clearMarkers();
+      markers = [];
+    }
+
+    if (partyName == "") {
+      var latitude = 40.4381311;
+      var longitude = -3.8196209;
+    } else {
+      var latitude = parseFloat($('#lat').text());
+      var longitude = parseFloat($('#long').text());
+    }
+
+    //Cambia la imagen del marker por uno propio
     let image = 'http://res.cloudinary.com/ignlopezsanchez/image/upload/v1524588458/newMarker.png';
     var icon = {
       url: "http://res.cloudinary.com/ignlopezsanchez/image/upload/v1524588458/newMarker.png", // url
       scaledSize: new google.maps.Size(50, 80), // scaled size
     };
 
+    //Informacion al clickear encima
     var contentString = `Nombre: <b>${partyName}</b>`
-
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
-
-    console.log(latitude)
-    let longitude = parseFloat($('#long').text());
-    console.log(longitude)
 
     const partyLocation = {
       lat: latitude,
@@ -30,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const partyMaker = new google.maps.Marker({
-
       position: {
         lat: latitude,
         lng: longitude
@@ -40,129 +60,103 @@ document.addEventListener('DOMContentLoaded', () => {
       title: partyName,
       icon: icon
     });
-    //partyMaker.addListener('click', toggleBounce);
+    markers.push(partyMaker);
 
     partyMaker.addListener('click', function () {
       infowindow.open(map, partyMaker);
       //toggleBounce;
     });
 
-    //Centra el mapa
-    // function placeMarkerAndPanTo(latLng, map) {
-    //   var marker = new google.maps.Marker({
-    //     position: latLng,
-    //     map: map
-    //   });
-    //   map.panTo(latLng);
-    // }
-
-    //Hace que el marcador salte
-    // function toggleBounce() {
-    //   if (partyMaker.getAnimation() !== null) {
-    //     partyMaker.setAnimation(null);
-    //   } else {
-    //     partyMaker.setAnimation(google.maps.Animation.BOUNCE);
-    //   }
-    // }
-
-    // map.addListener('click', function (e) {
-    //   placeMarkerAndPanTo(e.latLng, map);
-    // });
-
     //Geolocaliza con browser
     var geocoder = new google.maps.Geocoder();
 
     document.getElementById('submit').addEventListener('click', function () {
+      $('.hidemap').addClass('showmap')
+      deleteMarkers()
       geocodeAddress(geocoder, map);
     });
 
     function geocodeAddress(geocoder, resultsMap) {
-
       var address = document.getElementById('address').value;
 
       geocoder.geocode({ 'address': address }, function (results, status) {
         if (status === 'OK') {
           resultsMap.setCenter(results[0].geometry.location);
+
           var marker = new google.maps.Marker({
             map: resultsMap,
             position: results[0].geometry.location,
             draggable: true,
-            
+
           });
-          marker.addListener('dragend', function() {
-            // Do something with the positions here
-            // once the user has finished dragging the marker
-            //console.log(marker.getPosition().lat());
-            //console.log(marker.getPosition().lng()); 
+          markers.push(marker);
+
+          marker.addListener('dragend', function () {
             $("#latitude").val(marker.getPosition().lat());
             $("#longitude").val(marker.getPosition().lng());
-        });
-        
-          //console.log(results[0].geometry.location.lat())
+          });
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
     }
 
-    
-
-      // locationPlaces.forEach(places => {
-      //   const pos = {
-      //     lat: event.location.coordinates[1],
-      //     lng: event.location.coordinates[0]
-      //   };
-
-      //   const pin = new google.maps.Marker({
-      //     position: pos,
-      //     map: map,
-      //     title: places.name
-      //   });
-      //   markers.push(pin);
-      // });
 
 
-      //Try HTML5 geolocation.
-      var infoWindow = new google.maps.InfoWindow({map: map});
+
+    //Try HTML5 geolocation.
+    // var infoWindow = new google.maps.InfoWindow({ map: map });
 
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          console.log(pos)
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          map.setCenter(pos);
-          var marker = new google.maps.Marker({
-            map: resultsMap,
-            position: results[0].geometry.location,
-            draggable: true,
-            
-          });
-        }, function () {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(function (position) {
+    //     var pos = {
+    //       lat: position.coords.latitude,
+    //       lng: position.coords.longitude
+    //     };
+    //     //console.log(pos)
+    //     infoWindow.setPosition(pos);
+    //     infoWindow.setContent('<b>Posicion fiestil detectada, mandando farra...</b>');
+    //     map.setCenter(pos);
+    //     var marker = new google.maps.Marker({
+
+    //       position: {
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude
+    //       },
+    //       map: map,
+    //       draggable: true
+    //     });
+    //     marker.addListener('dragend', function () {
+    //       // Do something with the positions here
+    //       // once the user has finished dragging the marker
+    //       //console.log(marker.getPosition().lat());
+    //       //console.log(marker.getPosition().lng()); 
+    //       $("#latitude").val(marker.getPosition().lat());
+    //       $("#longitude").val(marker.getPosition().lng());
+    //     });
+
+    //   }, function () {
+    //     handleLocationError(true, infoWindow, map.getCenter());
+    //   });
+    // } else {
+    //   // Browser doesn't support Geolocation
+    //   handleLocationError(false, infoWindow, map.getCenter());
+    // }
+
+    // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    //   infoWindow.setPosition(pos);
+    //   infoWindow.setContent(browserHasGeolocation ?
+    //     'Error: The Geolocation service failed.' :
+    //     'Error: Your browser doesn\'t support geolocation.');
+
+    // }
 
 
-      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      //   infoWindow.setPosition(pos);
-      //   infoWindow.setContent(browserHasGeolocation ?
-      //     'Error: The Geolocation service failed.' :
-      //     'Error: Your browser doesn\'t support geolocation.');
-      // }
+  };
+  console.log('IronGenerator JS imported successfully!');
 
-
-    };
-    console.log('IronGenerator JS imported successfully!');
-
-  }, false);
+}, false);
 
 
 
