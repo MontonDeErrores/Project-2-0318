@@ -11,8 +11,8 @@ var data = {
         {
             fill: true,
             backgroundColor: [
-                '#BADF70',
-                '#36A2EB'],
+                '#173e43',
+                '#fae596'],
             data: [31.5, 68.5],
             hoverBackgroundColor: [
                 "#BADF70",

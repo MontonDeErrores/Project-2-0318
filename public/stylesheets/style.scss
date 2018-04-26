@@ -1,11 +1,14 @@
+@import "variables";
+@import "header";
+@import "footer";
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #488F8F;
+  background-color: $main-color;
 }
-
 a {
-  color: #200000;
+  color: $amarillo;
 }
 
 header {
@@ -50,7 +53,7 @@ main {
 }
 
 .fwidgets {
-  background-color: #488F8F;
+  background-color: $main-color;
   color: white;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -71,7 +74,7 @@ main {
 }
 
 #mainnav {
-  background-color: lightcoral;
+  background-color: $amarillo;
 }
 
 #map:not(.hidemap) {
@@ -117,7 +120,7 @@ html, body {
 }  
 
 .footer {
-  background-color: lightcoral;
+  background-color: $amarillo;
 }
 
 .form-signin {
@@ -177,12 +180,36 @@ html, body {
 
 .img-profile{
   width: 100px;
+  margin-bottom: 15px; 
 }
 
 .apartar{
-  padding: 100px;
+  padding: 50px;
 }
-@import "variables";
-@import "header";
-@import "footer";
+
+.sr-only {
+  margin-bottom: 5px;
+}
+
+.btn-maincolor {
+  background-color: $main-oscuro;
+  color: white;  
+}
+
+.d-flex {
+  display: flex;
+}
+
+.box-round {
+  border-radius: 20px;
+  margin: 20px 0;
+  background-color: $gris;
+}
+
+.create-event {
+  padding: 20px;
+  text-align: center;
+}
+
+
 
