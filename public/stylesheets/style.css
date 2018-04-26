@@ -145,7 +145,8 @@ html, body {
   font-size: 2em; }
 
 .img-profile {
-  width: 100px;
+  width: auto;
+  max-height: 200px;
   margin-bottom: 15px; }
 
 .apartar {
