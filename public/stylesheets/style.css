@@ -1,13 +1,13 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #488F8F; }
 
 a {
-  color: #00B7FF; }
+  color: #200000; }
 
 header {
-  height: 60px;
-  background-color: lightgreen; }
+  height: 50px; }
 
 header ul {
   margin-top: 25px; }
@@ -21,7 +21,14 @@ brand {
   font-weight: bold; }
 
 main {
-  padding-top: 60px; }
+  min-height: calc(100vh - 83px); }
+
+.upload-box {
+  margin-bottom: 5px; }
+
+.carousel-caption h2 {
+  background-color: rgba(28, 52, 52, 0.6);
+  display: inline-block; }
 
 .w-100 {
   width: 400px;
@@ -29,7 +36,7 @@ main {
   height: 600px; }
 
 .fwidgets {
-  background-color: #ed564b;
+  background-color: #488F8F;
   color: white;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -47,7 +54,7 @@ main {
   font-size: 20px; }
 
 #mainnav {
-  background-color: #b3ccff; }
+  background-color: lightcoral; }
 
 #map:not(.hidemap) {
   width: 100%;
@@ -85,7 +92,7 @@ html, body {
   transition: all .15s linear; }
 
 .footer {
-  background-color: #b3ccff; }
+  background-color: lightcoral; }
 
 .form-signin {
   width: 100%;
@@ -133,7 +140,7 @@ html, body {
   font-size: 2em; }
 
 .img-profile {
-  width: 400px; }
+  width: 100px; }
 
 .apartar {
   padding: 100px; }

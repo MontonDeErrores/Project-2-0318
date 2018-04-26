@@ -1,7 +1,8 @@
 var canvas = document.getElementById("barChart");
+
 var ctx = canvas.getContext('2d');
 
-Chart.defaults.global.defaultFontColor = 'black';
+Chart.defaults.global.defaultFontColor = 'White';
 Chart.defaults.global.defaultFontSize = 16;
 
 var data = {
@@ -10,11 +11,11 @@ var data = {
         {
             fill: true,
             backgroundColor: [
-                'blue',
-                'yellow'],
-            data: [33, 66],
+                '#BADF70',
+                '#36A2EB'],
+            data: [31.5, 68.5],
             hoverBackgroundColor: [
-                "#FF6384",
+                "#BADF70",
                 "#36A2EB",
             ]
         }

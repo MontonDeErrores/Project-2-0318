@@ -13,13 +13,16 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+    crossorigin="anonymous">
 </head>
 
 <body>
   <header>
     <nav id="mainnav" class="navbar navbar-expand-lg navbar-light fixed-top">
       <a class="navbar-brand" href="#">Fiestit</a>
+      <img class="" src="/images/logo.png" alt="" width="40" height="40">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,23 +32,22 @@
           <a class="nav-item nav-link active" href="/">Home
             <span class="sr-only">(current)</span>
           </a>
-          <a class="nav-item nav-link" href="/auth/signup">Sign up</a>
-          <a class="nav-item nav-link" href="/auth/login">Log in</a>
-          <a class="nav-item nav-link" href="/auth/profile">Profile</a>
-          <a class="nav-item nav-link" href="/auth/logout">Log out</a>
+          <a class="nav-item nav-link" href="/auth/signup">Registrarse</a>
+          <a class="nav-item nav-link" href="/auth/login">Acceder</a>
+          <a class="nav-item nav-link" href="/auth/profile">Perfil</a>
+          <a class="nav-item nav-link" href="/auth/logout">Salir</a>
         </div>
       </div>
     </nav>
   </header>
-  
+
   <main>
     {{{body}}}
   </main>
   <footer>
-    <nav class="navbar fixed-bottom navbar-light bg-faded footer">
-        <a class="navbar-brand" href="#">Fixed bottom</a>
-        <h6>Fiestit, a Pedro&Nacho company</h6>
-      </nav>
+    <nav class="navbar navbar-light bg-faded footer justify-content-center">
+      Fiestit, a Pedro & Nacho company - 2018
+    </nav>
   </footer>
 
 

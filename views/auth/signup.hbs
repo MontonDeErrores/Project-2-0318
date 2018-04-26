@@ -1,6 +1,6 @@
 <form class="form-signin" action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
 
-  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <img class="mb-4" src="/images/logo.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">FiestiSignup</h1>
 
   <label for="username" class="sr-only">Nombre de usuario</label>
@@ -15,8 +15,8 @@
   <!-- <label for="photo" >Foto de perfil:</label>
   <input id="photo" type="file" name="photo"> -->
 
-  <div class="input-group-prepend">
-    <span class="input-group-text">Upload</span>
+  <div class="input-group-prepend justify-content-center">
+    <span class="upload-box input-group-text "><i class="fas fa-arrow-down"></i>Upload<i class="fas fa-arrow-down"></i></span>
   </div>
   <div class="custom-file">
     <input type="file" class="custom-file-input" id="photo" name="photo">
@@ -30,12 +30,14 @@
     {{/if}}
   </div>
 
-  <p class="account-message">
-    ¿Ya tienes cuenta?
-    <a href="/auth/login">Login</a>
-  </p>
+  <div class="justify-content-center">
+    <p class="account-message ">
+      ¿Ya tienes cuenta?
+      <a href="/auth/login">Login</a>
+    </p>
+  </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+  
 </form>
 
 
