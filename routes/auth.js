@@ -116,14 +116,10 @@ authRoutes.get("/profile/", ensureLoggedIn('/auth/login'), (req, res) => {
   User.findById(id)
     .populate('events')
     .then(eventAll => {
-      // console.log(eventAll.events)
+      if(!eventAll){
       eventAll.events = eventAll.events.map(e=>{
         return e.fechaOK = e.date.toDateString()
-      });
-      
-      // console.log(eventAll)
-      // console.log(eventAll.events[0].fechaOK)
-
+      });}
       res.render("auth/profile", {eventAll})
     })
 });
