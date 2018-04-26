@@ -1,86 +1,99 @@
 <div class="container">
-  <div>
-    <h2><span id="partyname">{{event.name}}</span></h2>
-    <img class="img-dashboard" src="{{event.photo}}" alt="event photo">
-  
-    <h2><span id="date">{{date}}</span></h2>
-    <h2><span id="time">{{event.time}}</span></h2>
-    <h2 name="description">{{event.description}}</h2>
+  <div class="row box-round apartar">
+
+    <div class="col-sm-4">
+      <img class="img-dashboard img-fluid" src="{{event.photo}}" alt="event photo">
+    </div>
+
+    <div class="col-sm-8 party-container">
+      <div class="party-data">
+        <h3>
+          <span id="partyname">Fiesta: {{event.name}}</span>
+        </h3>
+        <h6>
+          <span id="date">Dia: {{date}}</span>
+        </h6>
+        <h6>
+          <span id="time">Hora: {{event.time}}</span>
+        </h6>
+        <h6 name="description">Descripcion: {{event.description}}</h6>
+      </div>
+    </div>
+
     <div id="map"></div>
-  
-    
-    <ul>
-      <label for="pool">Pool: </label>
-      <input id="pool" name="pool" type="checkbox" {{#if event.options.hasPool }} checked {{/if}} disabled>
-  
-      <label for="bbq">BBQ: </label>
-      <input id="bbq" name="bbq" type="checkbox" {{#if event.options.hasBBQ }} checked {{/if}} disabled>
-  
-      <label for="children">Children: </label>
-      <input id="children" name="children" type="checkbox" {{#if event.options.hasChildren }} checked {{/if}} disabled>
-  
-      <label for="private">Private: </label>
-      <input id="private" name="private" type="checkbox" {{#if event.options.isPrivate }} checked {{/if}} disabled>
-  
-      <label for="roof">Roof: </label>
-      <input id="roof" name="roof" type="checkbox" {{#if event.options.hasRoof }} checked {{/if}} disabled>
-  
-      <label for="parking">Parking: </label>
-      <input id="parking" name="parking" type="checkbox" {{#if event.options.hasParking }} checked {{/if}} disabled>
-  
-      <li class="ocultar-lat-long">
-        latitude:
-        <span id="lat">{{event.location.coordinates.[0]}}</span>
-      </li>
-      <li class="ocultar-lat-long">
-        longitude:
-        <span id="long">{{event.location.coordinates.[1]}}</span>
-      </li>
-  
-    </ul>
+
+
+    <div class="checks col-sm-12 justify-content-center">
+      <ul id="toggles">
+        <label for="pool">Pool: </label>
+        <input id="pool" name="pool" class="btn-toggle" type="checkbox" {{#if event.options.hasPool }} checked {{/if}} disabled>
+
+        <label for="bbq">BBQ: </label>
+        <input id="bbq" name="bbq" type="checkbox" {{#if event.options.hasBBQ }} checked {{/if}} disabled>
+
+        <label for="children">Children: </label>
+        <input id="children" name="children" type="checkbox" {{#if event.options.hasChildren }} checked {{/if}} disabled>
+
+        <label for="private">Private: </label>
+        <input id="private" name="private" type="checkbox" {{#if event.options.isPrivate }} checked {{/if}} disabled>
+
+        <label for="roof">Roof: </label>
+        <input id="roof" name="roof" type="checkbox" {{#if event.options.hasRoof }} checked {{/if}} disabled>
+
+        <label for="parking">Parking: </label>
+        <input id="parking" name="parking" type="checkbox" {{#if event.options.hasParking }} checked {{/if}} disabled>
+
+        <li class="ocultar-lat-long">
+          latitude:
+          <span id="lat">{{event.location.coordinates.[0]}}</span>
+        </li>
+        <li class="ocultar-lat-long">
+          longitude:
+          <span id="long">{{event.location.coordinates.[1]}}</span>
+        </li>
+      </ul>
+    </div>
+
+
     {{#each posts}}
+      <span>
+        <strong>{{userPosting.username}}</strong>
+      </span>
 
-    <span><strong>{{userPosting.username}}</strong></span>
-    <textarea rows="5" cols="25" id="post" class="form-control" name="post">{{post}}</textarea>
-    
-
+      <textarea rows="1" cols="1" id="post" class="form-control" name="post">{{post}}</textarea> 
     {{/each}}
 
-    <br><br>
-    <form action="/event/{{event._id}}/post" method="POST">
-      <label for="post">Añade un comentario</label>
-      <textarea rows="5" cols="25" id="post" class="form-control" name="post"></textarea>
-      <button>Publicar comentario</button>
-    </form>
-  
+      <div class="row col-sm-12 justify-content-center">
+        <form class="justify-content-center" id="form-event" action="/event/{{event._id}}/post" method="POST">
+          <label for="post">Añade un comentario</label>
+          <textarea rows="4" cols="1" id="post" class="form-control" name="post"></textarea>
+          <button class="btn btn-maincolor">Publicar comentario</button>
+        </form>
+      </div>
+
   </div>
-  
-  <div>
-    <h4>Asistentes</h4>
+
+  <div class="row box-round create-event">
+    <h6>Asistentes</h6>
     <ul>
       {{#each users}}
-  
-      <li class="listado-asistentes" >{{username}}</li>
-  
+      <p>
+        <li class="listado-asistentes">{{username}}</li>
+      </p>
       {{/each }}
-  
     </ul>
-  
-    
+  </div>
 
-
-
-
+  <div class="invite box-round create-event">
     <form action="/event/{{event._id}}/invite" method="POST" id="form-container">
       <label for="inviteMail">Mail</label>
       <input id="inviteMail" type="mail" name="inviteMail">
-     
-      <button>Invitar</button>
-
+      <button class="btn btn-maincolor">Invitar</button>
+      <a class="btn btn-maincolor" href="/event/{{event._id}}/edit" role="button">Editar fiesta</a>
     </form>
-
-
   </div>
-  <a class="btn btn-primary" href="/event/{{event._id}}/edit" role="button">Editar fiesta</a>
-  
+
+
+</div>
+
 </div>
