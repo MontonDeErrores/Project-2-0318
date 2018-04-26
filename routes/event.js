@@ -3,6 +3,7 @@ const passport = require('passport');
 const eventRoutes = express.Router();
 const User = require("../models/User");
 const Events = require("../models/Event");
+const Post = require("../models/Post");
 const uploadCloud = require("../config/cloudinary.js");
 const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
 const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
@@ -27,7 +28,7 @@ eventRoutes.get("/new", ensureLoggedIn('/auth/login'), (req, res) => {
 eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
   let date = req.body.date;
  
-  const {name, description} = req.body;
+  const {name, description, time} = req.body;
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
   const options = {hasPool: pool, hasBBQ: bbq, hasChildren: children, hasWifi: wifi, isPrivate: private, hasRoof: roof, hasParking: parking};
   if (req.file){
@@ -45,6 +46,7 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
   const newEvent = new Events({
     name,
     description,
+    time,
     photo,
     date,
     location,
@@ -96,7 +98,7 @@ eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
 
 eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
   let id = req.params.id;
-  const {name, description, date} = req.body;
+  const {name, description, date, time} = req.body;
   console.log(req.body);
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
   const options = {hasPool: pool, hasBBQ: bbq, hasChildren: children, hasWifi: wifi, isPrivate: private, hasRoof: roof, hasParking: parking};
@@ -112,6 +114,7 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
         description,
         photo,
         date,
+        time,
         location,
         options};
   }
@@ -120,6 +123,7 @@ eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single
       name,
       description,
       date,
+      time,
       location,
       options};
   }
@@ -157,27 +161,51 @@ eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) 
     }
     else{
       //mandar mail
-
-
-    }
-    
+    }    
       
   })
   .catch((err)=>{
     console.log(err);
     next();
-
   })
 
 })
+
+
+//CRUD --- Event post
+eventRoutes.post("/:id/post", ensureLoggedIn('/auth/login'), (req, res, next) => {
+  const eventPosted = req.params.id;
+  console.log(`eventId ${eventPosted}`)
+  const userPosting = req.user.id;
+  console.log(`userid ${userPosting}`)
+  const post = req.body.post;
+  const newPost = new Post({
+    eventPosted,
+    userPosting,
+    post})
+
+    newPost.save().then((u)=>{
+      res.redirect(`/event/${eventPosted}`)
+    })
+    .catch(e=>{
+      console.log(e)
+      next();
+    })
+});
+
 
 //CRUD --- Event profile
 eventRoutes.get("/:id", ensureLoggedIn('/auth/login'), (req, res, next) => {
   let eventId = req.params.id;
   if (isInEvent(eventId, req.user)) {
     Events.findById(eventId).then(event => {
+      const date = event.date.toDateString();
       User.find({"events": eventId}).then(users => {
-        res.render("event/dashboard", {event, users} );
+        Post.find({"eventPosted": eventId}).populate("userPosting").then((posts)=>{
+          console.log(posts)
+
+          res.render("event/dashboard", {event, users, posts, date} );
+        })
       })
   })
 }

@@ -4,6 +4,7 @@ const Schema   = mongoose.Schema;
 const eventSchema = new Schema({
   name: String,
   date: Date,
+  time: String,
   location: { type: { type: String }, coordinates: [Number] },
   options: {
     hasPool: {type: Boolean, default: false},

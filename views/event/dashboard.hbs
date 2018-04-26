@@ -3,8 +3,9 @@
     <h2><span id="partyname">{{event.name}}</span></h2>
     <img class="img-dashboard" src="{{event.photo}}" alt="event photo">
   
-  
-    <p name="description">{{event.description}}</p>
+    <h2><span id="date">{{date}}</span></h2>
+    <h2><span id="time">{{event.time}}</span></h2>
+    <h2 name="description">{{event.description}}</h2>
     <div id="map"></div>
   
     
@@ -37,6 +38,20 @@
       </li>
   
     </ul>
+    {{#each posts}}
+
+    <span><strong>{{userPosting.username}}</strong></span>
+    <textarea rows="5" cols="25" id="post" class="form-control" name="post">{{post}}</textarea>
+    
+
+    {{/each}}
+
+    <br><br>
+    <form action="/event/{{event._id}}/post" method="POST">
+      <label for="post">Añade un comentario</label>
+      <textarea rows="5" cols="25" id="post" class="form-control" name="post"></textarea>
+      <button>Publicar comentario</button>
+    </form>
   
   </div>
   
@@ -51,6 +66,11 @@
   
     </ul>
   
+    
+
+
+
+
     <form action="/event/{{event._id}}/invite" method="POST" id="form-container">
       <label for="inviteMail">Mail</label>
       <input id="inviteMail" type="mail" name="inviteMail">
