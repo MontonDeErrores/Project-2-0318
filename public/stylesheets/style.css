@@ -136,7 +136,12 @@ html, body {
 
 .img-profile {
   width: auto;
+<<<<<<< HEAD
   max-height: 200px; }
+=======
+  max-height: 200px;
+  margin-bottom: 15px; }
+>>>>>>> 7dacda4d5411fe97996144f54ea5ff60dd2f94c7
 
 .apartar {
   padding: 50px; }

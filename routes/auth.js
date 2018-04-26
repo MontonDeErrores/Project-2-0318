@@ -111,16 +111,20 @@ authRoutes.get("/new", (req, res) => {
 
 //CRUD --- Retreive profile
 authRoutes.get("/profile/", ensureLoggedIn('/auth/login'), (req, res) => {
+  
   let id = req.user.id;
   User.findById(id)
     .populate('events')
     .then(eventAll => {
-      const totalEvents = eventAll.events;
-      const fechas = totalEvents.map((e)=>{
-        return e.date.toDateString();
-      })
-      console.log(fechas)
-      res.render("auth/profile", {eventAll, fechas})
+      // console.log(eventAll.events)
+      eventAll.events = eventAll.events.map(e=>{
+        return e.fechaOK = e.date.toDateString()
+      });
+      
+      // console.log(eventAll)
+      // console.log(eventAll.events[0].fechaOK)
+
+      res.render("auth/profile", {eventAll})
     })
 });
 
