@@ -140,16 +140,28 @@ eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) 
   const mail = req.body.inviteMail;
   User.findOne({"email": mail} )
   .then((user)=>{
-      user.events.unshift(req.params.id);
-      var uniqueArray = function(arrArg) {               //si invitas a la misma persona varias veces, se eliminan duplicados del array evetns
-        return arrArg.filter(function(elem, pos,arr) {
-          return arr.indexOf(elem) == pos;
-        });
-      };
-      user.events = uniqueArray(user.events);
-      user.save().then(()=>{
-      res.redirect(`/event/${partyId}`)
+    if (user){
+      let filtrado = user.events.filter(e=>{       
+        return e==partyId
       })
+      if (filtrado.length > 0){
+        console.log("no pongo fiesta porque ya la tenia");
+        res.redirect(`/event/${partyId}`)
+      } else {
+        user.events.unshift(partyId);
+        console.log("fiesta puesta")
+        user.save().then(u=>{
+          res.redirect(`/event/${partyId}`)
+        })
+      }
+    }
+    else{
+      //mandar mail
+
+
+    }
+    
+      
   })
   .catch((err)=>{
     console.log(err);

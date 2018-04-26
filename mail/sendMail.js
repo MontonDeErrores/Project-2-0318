@@ -1,5 +1,5 @@
 //const mjmlUtils = require("mjml-utils");
-const transporter = require("./transporterGmail");
+// const transporter = require("./transporterGmail");
 const path = require("path");
   // const pathToHtmlEmailTemplate = path.join(
   //   __dirname,
