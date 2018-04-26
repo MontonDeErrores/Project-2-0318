@@ -11,6 +11,9 @@ body {
 a {
   color: #fae596; }
 
+.party-link {
+  color: #3fb0ac; }
+
 header {
   height: 50px; }
 
@@ -72,19 +75,6 @@ html, body {
   margin: 0;
   padding: 0; }
 
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px; }
-
 .hidemap {
   height: 0;
   border: none;
@@ -137,17 +127,21 @@ html, body {
   display: none; }
 
 .img-dashboard {
-  width: 400px;
-  display: inline; }
+  width: auto;
+  max-height: 300px;
+  margin-bottom: 25px; }
 
 .listado-asistentes {
-  list-style-type: none;
-  font-size: 2em; }
+  list-style-type: none; }
 
 .img-profile {
   width: auto;
+<<<<<<< HEAD
+  max-height: 200px; }
+=======
   max-height: 200px;
   margin-bottom: 15px; }
+>>>>>>> 7dacda4d5411fe97996144f54ea5ff60dd2f94c7
 
 .apartar {
   padding: 50px; }
@@ -164,11 +158,24 @@ html, body {
 
 .box-round {
   border-radius: 20px;
-  margin: 20px 0;
+  margin: 20px 0px 30px 0px;
   background-color: #dddfd4; }
 
 .create-event {
   padding: 20px;
   text-align: center; }
+
+#form-event {
+  width: 60%;
+  height: auto; }
+
+#post {
+  margin-bottom: 10px; }
+
+#toggles {
+  text-align: center; }
+
+.party-container {
+  margin-bottom: 20px; }
 
 /*# sourceMappingURL=style.css.map */
