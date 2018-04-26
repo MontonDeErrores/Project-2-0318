@@ -34,6 +34,7 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const username = req.body.username;
   const email = req.body.email;
+  const gender = req.body.inputGroupSelect01;
   const password = req.body.password;
   if (req.file){
     photo = req.file.url;
@@ -63,6 +64,7 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
     const newUser = new User({
       username,
       email,
+      gender,
       password: hashPass,
       photo
     });

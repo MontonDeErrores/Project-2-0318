@@ -7,7 +7,17 @@
   <input type="text" id="username" name="username" class="form-control" placeholder="Nombre de usuario" required autofocus>
 
   <label for="email" class="sr-only">Email</label>
-  <input type="email" id="email" name="email" class="form-control" placeholder="pepe@ironhack.es" required autofocus>
+  <input type="email" id="email" name="email" class="form-control" placeholder="Mail" required autofocus>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Género</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01" name="inputGroupSelect01">
+      <option id="hombre" name="hombre" value="Hombre">Hombre</option>
+      <option id="mujer" name="mujer" value="Mujer">Mujer</option>
+    </select>
+  </div>
 
   <label for="password" class="sr-only">Password</label>
   <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
