@@ -6,7 +6,7 @@ Chart.defaults.global.defaultFontColor = 'White';
 Chart.defaults.global.defaultFontSize = 16;
 
 var data = {
-     labels: ["Outdoor 66%", "Indoor 33%"],
+     labels: ["Outdoor 68.5%", "Indoor 31.5%"],
       datasets: [
         {
             fill: true,

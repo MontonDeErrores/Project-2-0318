@@ -157,7 +157,7 @@ eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) 
       }
     }
     else{
-      mensaje = `http://localhost:3000/auth/signup?key=${partyId}`
+      mensaje =  `http://fiestit.herokuapp.com/auth/signup?key=${partyId}`
       sendMail(mail, mensaje);
       res.redirect(`/event/${partyId}`)
     }    
