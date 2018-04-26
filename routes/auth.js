@@ -27,11 +27,14 @@ authRoutes.post("/login", passport.authenticate("local", {
 }));
 
 authRoutes.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  const invitado = req.query.key;
+  console.log(invitado);
+  res.render("auth/signup", {invitado});
 });
 
 authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
   const salt = bcrypt.genSaltSync(bcryptSalt);
+  const invitado = req.body.invitado;
   const username = req.body.username;
   const email = req.body.email;
   const gender = req.body.inputGroupSelect01;
@@ -59,6 +62,9 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
       res.render("auth/signup", { message: "The username already exists" });
       return;
     }
+    if (invitado){
+      var events = invitado;
+    }
     const confirmationCode = bcrypt.hashSync(username, salt);
     const hashPass = bcrypt.hashSync(password, salt);
     const newUser = new User({
@@ -66,7 +72,8 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
       email,
       gender,
       password: hashPass,
-      photo
+      photo,
+      events
     });
 
     newUser.save((err) => {
@@ -74,12 +81,16 @@ authRoutes.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
         console.log("Error save")
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        console.log(11)
-        sendMail(newUser.email, newUser.confirmationCode)
+        req.login(newUser, function(err) {
+          if (!err) {
+              res.redirect("/auth/profile");
+          } else {
+              res.render("error", err);
+          }
+      });
+        const mensaje = `Bienvenido a Fiestit, donde podrás organizar todas tus fiestas.`
+        sendMail(newUser.email, mensaje)
           .then(() => {
-            console.log("Console log en el authjs linea 60");
-            console.log(confirmationCode)
-            console.log(newUser.confirmationCode)
             res.redirect("/");
           })
       }
@@ -104,7 +115,12 @@ authRoutes.get("/profile/", ensureLoggedIn('/auth/login'), (req, res) => {
   User.findById(id)
     .populate('events')
     .then(eventAll => {
-      res.render("auth/profile", {eventAll})
+      const totalEvents = eventAll.events;
+      const fechas = totalEvents.map((e)=>{
+        return e.date.toDateString();
+      })
+      console.log(fechas)
+      res.render("auth/profile", {eventAll, fechas})
     })
 });
 

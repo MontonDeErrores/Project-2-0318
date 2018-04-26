@@ -99,7 +99,6 @@ eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
 eventRoutes.post("/:id/edit", [ensureLoggedIn('/auth/login'), uploadCloud.single("photo")] ,(req, res, next) => {
   let id = req.params.id;
   const {name, description, date, time} = req.body;
-  console.log(req.body);
   const {pool, bbq, children, wifi, private, roof, parking} = req.body;
   const options = {hasPool: pool, hasBBQ: bbq, hasChildren: children, hasWifi: wifi, isPrivate: private, hasRoof: roof, hasParking: parking};
   let location = {
@@ -149,18 +148,18 @@ eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) 
         return e==partyId
       })
       if (filtrado.length > 0){
-        console.log("no pongo fiesta porque ya la tenia");
         res.redirect(`/event/${partyId}`)
       } else {
         user.events.unshift(partyId);
-        console.log("fiesta puesta")
         user.save().then(u=>{
           res.redirect(`/event/${partyId}`)
         })
       }
     }
     else{
-      //mandar mail
+      mensaje = `http://localhost:3000/auth/signup?key=${partyId}`
+      sendMail(mail, mensaje);
+      res.redirect(`/event/${partyId}`)
     }    
       
   })
@@ -175,9 +174,7 @@ eventRoutes.post("/:id/invite", ensureLoggedIn('/auth/login'), (req, res, next) 
 //CRUD --- Event post
 eventRoutes.post("/:id/post", ensureLoggedIn('/auth/login'), (req, res, next) => {
   const eventPosted = req.params.id;
-  console.log(`eventId ${eventPosted}`)
   const userPosting = req.user.id;
-  console.log(`userid ${userPosting}`)
   const post = req.body.post;
   const newPost = new Post({
     eventPosted,
@@ -202,8 +199,6 @@ eventRoutes.get("/:id", ensureLoggedIn('/auth/login'), (req, res, next) => {
       const date = event.date.toDateString();
       User.find({"events": eventId}).then(users => {
         Post.find({"eventPosted": eventId}).populate("userPosting").then((posts)=>{
-          console.log(posts)
-
           res.render("event/dashboard", {event, users, posts, date} );
         })
       })
