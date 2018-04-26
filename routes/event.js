@@ -91,7 +91,7 @@ eventRoutes.get("/:id/edit", ensureLoggedIn('/auth/login'), (req, res) => {
       })
     }
     else {
-      res.redirect("/")
+      res.redirect(`/event/${id}`)
     }
   })
 });
