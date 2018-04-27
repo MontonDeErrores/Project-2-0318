@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row box-round">
     <div class="col-sm-8 apartar">
-      <h3> <i class="fas fa-user"></i> Usuario: {{eventAll.username}}</h3>
+      <h3>
+        <i class="fas fa-user"></i> Usuario: {{eventAll.username}}</h3>
       <div class="d-flex justify-content-center">
         <img class="img-profile" src="{{eventAll.photo}}" alt="foto de perfil">
       </div>
@@ -32,7 +33,7 @@
           </div>
 
           <div class="custom-file">
-            <label  class="custom-file-label" for="photo">Elige una foto</label>
+            <label class="custom-file-label" for="photo">Elige una foto</label>
             <input type="file" class="custom-file-input" name="photo" id="photo">
           </div>
         </div>
@@ -45,12 +46,15 @@
 
 
     <div class="col-sm-4 apartar">
-      <h4><i class="fas fa-calendar-alt"></i> Próximas fiestas</h4>
+      <h4>
+        <i class="fas fa-calendar-alt"></i> Próximas fiestas</h4>
       <ul>
         {{#each eventAll.events}}
 
         <li>
-          <a class="party-link" href="/event/{{id}}">{{name}}</a><h6>{{time}}</h6><h6>{{fechaOK}}</h6>
+          <a class="party-link" href="/event/{{id}}">{{name}}</a>
+          <h6>{{time}}</h6>
+          <h6>{{fechaOK}}</h6>
         </li>
 
         {{/each}}
@@ -58,7 +62,7 @@
 
 
     </div>
-    
+
   </div>
   <div class="col-sm-12 box-round create-event justify-content-center">
     <a class="btn btn-maincolor" href="/event/new" role="button">Crear fiesta</a>

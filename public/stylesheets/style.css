@@ -136,12 +136,8 @@ html, body {
 
 .img-profile {
   width: auto;
-<<<<<<< HEAD
-  max-height: 200px; }
-=======
   max-height: 200px;
   margin-bottom: 15px; }
->>>>>>> 7dacda4d5411fe97996144f54ea5ff60dd2f94c7
 
 .apartar {
   padding: 50px; }
@@ -177,5 +173,21 @@ html, body {
 
 .party-container {
   margin-bottom: 20px; }
+
+#floating-panel {
+  width: 33%;
+  min-width: 200px;
+  justify-content: center; }
+
+#create-form {
+  margin-top: 30px;
+  width: 80%;
+  justify-content: center; }
+
+#address {
+  text-align: center; }
+
+.btn-10 {
+  margin-top: 10px; }
 
 /*# sourceMappingURL=style.css.map */
