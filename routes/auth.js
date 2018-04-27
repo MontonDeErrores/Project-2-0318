@@ -5,10 +5,10 @@ const User = require("../models/User");
 const Events = require("../models/Event");
 const uploadCloud = require("../config/cloudinary.js");
 const sendMail = require("../mail/sendMail");
-const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
+//const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
 const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
-const isAdmin = require('../middlewares/isAdmin');
-const isInEvent = require('../middlewares/isInEvent');
+//const isAdmin = require('../middlewares/isAdmin');
+//const isInEvent = require('../middlewares/isInEvent');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -28,7 +28,7 @@ authRoutes.post("/login", passport.authenticate("local", {
 
 authRoutes.get("/signup", (req, res, next) => {
   const invitado = req.query.key;
-  console.log(invitado);
+  //console.log(invitado);
   res.render("auth/signup", {invitado});
 });
 
@@ -110,16 +110,17 @@ authRoutes.get("/new", (req, res) => {
 
 
 //CRUD --- Retreive profile
-authRoutes.get("/profile/", ensureLoggedIn('/auth/login'), (req, res) => {
+authRoutes.get("/profile", ensureLoggedIn('/auth/login'), (req, res) => {
   
   let id = req.user.id;
   User.findById(id)
     .populate('events')
     .then(eventAll => {
-      if(!eventAll){
+      if(eventAll){
       eventAll.events = eventAll.events.map(e=>{
         return e.fechaOK = e.date.toDateString()
       });}
+      console.log(eventAll.events.fechaOk)
       res.render("auth/profile", {eventAll})
     })
 });

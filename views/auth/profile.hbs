@@ -52,9 +52,12 @@
         {{#each eventAll.events}}
 
         <li>
-          <a class="party-link" href="/event/{{id}}">{{name}}</a>
-          <h6>{{time}}</h6>
-          <h6>{{fechaOK}}</h6>
+          <h6>
+            <a class="party-link" href="/event/{{id}}">{{name}}</a>
+          </h6>
+          <p>
+            {{time}} {{fechaOK}}
+          </p>
         </li>
 
         {{/each}}

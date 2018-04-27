@@ -26,7 +26,7 @@
     <div class="checks col-sm-12 justify-content-center">
       <ul id="toggles">
         <label for="pool">Pool: </label>
-        <input  id="pool" name="pool" class="btn-toggle" type="checkbox" {{#if event.options.hasPool }} checked {{/if}} disabled>
+        <input id="pool" name="pool" class="btn-toggle" type="checkbox" {{#if event.options.hasPool }} checked {{/if}} disabled>
 
         <label for="bbq">BBQ: </label>
         <input id="bbq" name="bbq" type="checkbox" {{#if event.options.hasBBQ }} checked {{/if}} disabled>
@@ -56,20 +56,19 @@
 
 
     {{#each posts}}
-      <span>
-        <strong>{{userPosting.username}}</strong>
-      </span>
+    <span>
+      <strong>{{userPosting.username}}</strong>
+    </span>
 
-      <textarea rows="1" cols="1" id="post" class="form-control" name="post">{{post}}</textarea> 
-    {{/each}}
+    <textarea rows="1" cols="1" id="post" class="form-control" name="post">{{post}}</textarea> {{/each}}
 
-      <div class="row col-sm-12 justify-content-center">
-        <form class="justify-content-center" id="form-event" action="/event/{{event._id}}/post" method="POST">
-          <label for="post">Añade un comentario</label>
-          <textarea rows="4" cols="1" id="post" class="form-control" name="post"></textarea>
-          <button class="btn btn-maincolor">Publicar comentario</button>
-        </form>
-      </div>
+    <div class="row col-sm-12 justify-content-center">
+      <form class="justify-content-center" id="form-event" action="/event/{{event._id}}/post" method="POST">
+        <label for="post">Añade un comentario</label>
+        <textarea rows="4" cols="1" id="post" class="form-control" name="post"></textarea>
+        <button class="btn btn-maincolor">Publicar comentario</button>
+      </form>
+    </div>
 
   </div>
 
@@ -95,4 +94,3 @@
 
 
 </div>
-

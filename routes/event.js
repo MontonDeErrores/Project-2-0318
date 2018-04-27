@@ -5,9 +5,9 @@ const User = require("../models/User");
 const Events = require("../models/Event");
 const Post = require("../models/Post");
 const uploadCloud = require("../config/cloudinary.js");
-const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
+//const ensureLoggedOut = require('../middlewares/ensureLoggedOut');
 const ensureLoggedIn = require('../middlewares/ensureLoggedIn');
-const isAdmin = require('../middlewares/isAdmin');
+//const isAdmin = require('../middlewares/isAdmin');
 const isInEvent = require('../middlewares/isInEvent');
 const isCreator = require('../middlewares/isCreator');
 const sendMail = require("../mail/sendMail");
@@ -59,7 +59,7 @@ eventRoutes.post("/new", [ensureLoggedIn('/auth/login'), uploadCloud.single("pho
       user.events.unshift(event._id);
       user.save()
       .then((user) =>{
-        res.redirect(`/`)
+        res.redirect("/auth/profile")
 
       })
       .catch((err) => next(err))

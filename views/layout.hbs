@@ -16,7 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
     crossorigin="anonymous">
-  
+
 </head>
 
 <body>
@@ -30,20 +30,13 @@
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link active" href="/">Home
+            <span class="sr-only">(current)</span>
+          </a>
           <a class="nav-item nav-link" href="/auth/signup">Registrarse</a>
           <a class="nav-item nav-link" href="/auth/login">Acceder</a>
           <a class="nav-item nav-link" href="/auth/profile">Perfil</a>
           <a class="nav-item nav-link" href="/auth/logout">Salir</a>
-          {{#if user}}
-           <p>Welcome, {{user.username}}</p>
-    <a href="/auth/logout">Logout</a>
-{{else}}
-    <h2>You are not logged in!</h2>
-    <a href="/auth/signup">Signup/Registro</a>
-    </br>
-    <a href="/auth/login">Login</a>
-{{/if}}
         </div>
       </div>
     </nav>
