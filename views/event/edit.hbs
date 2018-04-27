@@ -1,85 +1,110 @@
 
 <div class="container">
-    <div class="row">
-      <h2><span id="partyname">{{event.name}}</span></h2>
-      <div id="map"></div>
+    <div class="row box-round apartar">
+      <div id="centered" class="row">
+        
+        <!-- <div id="map"></div>
+    
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9sMOZtj7Sp4V7w9nZGmheBRXhDhSjveU"></script> -->
+        <br>
+        <br>
+        <form   action="/event/{{event._id}}/edit" method="POST" id="form-container" enctype="multipart/form-data">
+          
+          
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="col-sm-11">
+                <label for="name" >Nombre</label>
+                <input type="text" id="name" name="name" class="form-control" value="{{event.name}}" required autofocus>
+              </div>
+              <br>
+              <br>
+              <div class="col-sm-8">
+                <label for="date">Nueva fecha</label>
+                <input id="date" type="date" name="date" class="form-control" value="{{date}}" required autofocus>
+              </div>
+              <br>
+              <br>        
+              <div class="col-sm-5">
+                <label for="time" >Hora</label>
+                <input type="text" id="time" name="time" class="form-control" value="{{event.time}}" required autofocus>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="col-sm-8">
+              <div class="col-sm-8">
+                <img class="img-dashboard img-fluid" src="{{event.photo}}" alt="actual photo">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="photo" name="photo">
+                  <label class="custom-file-label" for="photo">Foto</label>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <br>
+          <br>
+          <div class="col-sm-10">
+            <label for="description">Descripción</label>
+            <textarea rows="10" cols="50" id="description" class="form-control" name="description">{{event.description}}</textarea>
+          </div>
+          
+          <br>
+          <br>
   
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9sMOZtj7Sp4V7w9nZGmheBRXhDhSjveU"></script>
-      <br>
-      <br>
-      <form action="/event/{{event._id}}/edit" method="POST" id="form-container" enctype="multipart/form-data">
-        <label for="name">Nombre</label>
-        <input id="name" type="text" name="name" value="{{event.name}}">
-        <br>
-        <br>
-        <label for="description">Descripción</label>
-        <textarea rows="10" cols="50" id="description" class="form-control" name="description">{{event.description}}</textarea>
-        <br>
-        <br>
-        <h2>Foto actual</h2>
-        <img src="{{event.photo}}" alt="actual photo">
-        <label for="photo">Cambiar foto</label>
-        <input id="photo" type="file" name="photo">      
-        <br>
-        <br>
-        <label for="date">Nueva fecha</label>
-        <input id="date" type="date" name="date" value="{{date}}">
-        <br>
-        <br><label for="time">Nueva hora</label>
-        <input id="time" type="text" name="time" value="{{event.time}}">
-        <br>
-        <br>
-
-        <li class="ocultar-lat-long">
-          latitude:
-          <span id="lat">{{event.location.coordinates.[0]}}</span>
-        </li>
-        <li class="ocultar-lat-long">
-          longitude:
-          <span id="long">{{event.location.coordinates.[1]}}</span>
-        </li>
-
-
-        <label for="latitude">Latitud</label>
-        <input id="latitude" type="text" name="latitude" value="{{event.location.coordinates.[0]}}">
-        <br>
-        <br>
-        <label for="longitude">Longitud</label>
-        <input id="longitude" type="text" name="longitude" value="{{event.location.coordinates.[1]}}">
-        <br>
-        <br>
-
-        <label for="pool">Piscina: </label>
-        <input id="pool" name="pool" type="checkbox"  {{#if event.options.hasPool }} checked {{/if}}>
-        <br>
-        <br>
-        <label for="bbq">BBQ: </label>
-        <input id="bbq" name="bbq" type="checkbox" {{#if event.options.hasBBQ }} checked {{/if}}>
-        <br>
-        <br>
-        <label for="children">Niños: </label>
-        <input id="children" name="children" type="checkbox" {{#if event.options.hasChildren }} checked {{/if}}>
-        <br>
-        <br>
-        <label for="wifi">Wifi: </label>
-        <input id="wifi" name="wifi" type="checkbox" {{#if event.options.hasWifi }} checked {{/if}}>
-        <br>
-        <br>
-        <label for="private">Privada: </label>
-        <input id="private" name="private" type="checkbox" {{#if event.options.isPrivate }} checked {{/if}}>
-        <br>
-        <br>
-        <label for="roof">Bajo techo </label>
-        <input id="roof" name="roof" type="checkbox" {{#if event.options.hasRoof }} checked {{/if}}>
-        <br>
-        <br>
-        <label for="parking">Parking: </label>
-        <input id="parking" name="parking" type="checkbox" {{#if event.options.hasParking }} checked {{/if}}>
-        <button>Guardar cambios</button>
+          <li class="ocultar-lat-long">
+            latitude:
+            <span id="lat">{{event.location.coordinates.[0]}}</span>
+          </li>
+          <li class="ocultar-lat-long">
+            longitude:
+            <span id="long">{{event.location.coordinates.[1]}}</span>
+          </li>
   
-      </form>
-
   
-      <button>Invita a un amigo</button>
+          <div class="ocultar-lat-long">
+            <label for="latitude">Latitud</label>
+            <input id="latitude" type="text" name="latitude" value="{{event.location.coordinates.[0]}}">
+            <br>
+            <br>
+            <label for="longitude">Longitud</label>
+            <input id="longitude" type="text" name="longitude" value="{{event.location.coordinates.[1]}}">
+          </div>
+          <br>
+          <br>
+  
+          <div class="checks col-sm-12 justify-content-center">
+            <ul id="toggles">
+              <label for="pool">Piscina: </label>
+              <input id="pool" name="pool" type="checkbox"  {{#if event.options.hasPool }} checked {{/if}}>
+              
+              <label for="bbq">BBQ: </label>
+              <input id="bbq" name="bbq" type="checkbox" {{#if event.options.hasBBQ }} checked {{/if}}>
+              
+              <label for="children">Niños: </label>
+              <input id="children" name="children" type="checkbox" {{#if event.options.hasChildren }} checked {{/if}}>
+              
+              <label for="wifi">Wifi: </label>
+              <input id="wifi" name="wifi" type="checkbox" {{#if event.options.hasWifi }} checked {{/if}}>
+              
+              <label for="private">Privada: </label>
+              <input id="private" name="private" type="checkbox" {{#if event.options.isPrivate }} checked {{/if}}>
+              
+              <label for="roof">Bajo techo </label>
+              <input id="roof" name="roof" type="checkbox" {{#if event.options.hasRoof }} checked {{/if}}>
+              
+              <label for="parking">Parking: </label>
+              <input id="parking" name="parking" type="checkbox" {{#if event.options.hasParking }} checked {{/if}}>
+            </ul>
+          </div>
+          <div class="invite box-round create-event">
+            <button class="btn btn-maincolor">Guardar cambios</button>
+          </div>
+          
+    
+        </form>
+  
+      </div>
     </div>
   </div>
